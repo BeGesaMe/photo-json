@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+        }
+        .card-img{
+            width: 100%;
+        }
+        .card{
+            width: 30%;
+            border-radius: 10px 10px 0px 0px;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+        }
+        .card-title {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="box"></div>
+
+
+   <template class="card-template">
+        <div class="card">
+            <img src="" class="card-img">
+            <h4 class="card-title"></h4>
+        </div>
+   </template>
+
+
+    
+
+
+    <script>
+
+        
+        
+
+        fetch('https://jsonplaceholder.typicode.com/photos').then(res => res.json()).then(result => {
+           
+
+                let body = document.querySelector('.box');
+                let cardTemplate = document.querySelector('.card-template').content;
+                let newTemplate = new DocumentFragment();
+
+            result.slice(0, 100).forEach((el)=>{
+
+            
+                let cloneCardTemplate = cardTemplate.cloneNode(true)
+
+                let rasm = cloneCardTemplate.querySelector('.card-img').src = el.thumbnailUrl
+                let title = cloneCardTemplate.querySelector('.card-title').textContent  = el.title
+
+             
+                body.appendChild(cloneCardTemplate)
+
+
+            })
+        })
+
+
+
+
+    </script>
+</body>
+</html>
